@@ -1,26 +1,32 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
+import { withRouter, RouteComponentProps } from 'react-router';
+import TodoContext from '../../../../../app/todo/context';
 import './TodoItem.css';
 
-export default function TodoItem(props: { title: string, description: string, id: number, isCompleted:boolean }) {
-  const [isActive, setIsActive] = useState('');
+interface IProps extends RouteComponentProps<any> { title: string, description: string, id: string, isCompleted:string };
+
+function TodoItem(props: IProps) {
+  const { setViewTodo } = useContext(TodoContext);
   return (
-    <div className="todo-item">
+    <div className="todo-item" key={props.id} role="link" aria-label="click to edit selected todo" onClick={() => {
+      setViewTodo({
+        title: props.title,
+        id: props.id,
+        description: props.description,
+        isCompleted: props.isCompleted,
+      })
+      props.history.push(`/edit/${props.id}`);
+    }}>
       <div className="todo-item-details">
         <h4 className="todo-item-title">
-          New Item
+          {props.title}
         </h4>
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae ab laboriosam minus non dolor nostrum quidem sunt voluptatum, et quaerat doloribus excepturi eos quasi, reprehenderit nesciunt molestias architecto optio illum.
+          {props.description}
         </p>
       </div>
       <div className="todo-item-toggler">
-        <span className={`toggler ${isActive}`} onClick={(e) => {
-          if (isActive) {
-            setIsActive('');
-          } else {
-            setIsActive('active');
-          }
-        }}>
+        <span className={`toggler ${props.isCompleted === 'true' ? 'active': ''}`}>
           <span className="thin-bar"></span>
           <span className="circle"></span>
         </span>
@@ -28,3 +34,5 @@ export default function TodoItem(props: { title: string, description: string, id
     </div>
   )
 }
+
+export default withRouter(TodoItem)

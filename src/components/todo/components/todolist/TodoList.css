@@ -1,7 +1,7 @@
 .todo-list {
   background-color: #343440;
   padding: 0px 10px;
-  width: 20%;
+  max-width: 500px;
   min-width: 500px;
   min-height: 100vh;
 }

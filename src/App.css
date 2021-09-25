@@ -1,4 +1,4 @@
-* {
+h1 {
   color: white;
 }
 
@@ -6,4 +6,12 @@ body {
   padding: 0;
   margin: 0;
   background-color: #1B1C26;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
 }

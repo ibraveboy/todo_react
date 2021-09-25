@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './TodoList.css';
 import TodoItem from './TodoItem/TodoItem'
+import TodoContext from '../../../../app/todo/context';
+import { useObserver } from 'mobx-react-lite';
 
 export default function TodoList() {
-  return (
+  const { todos } = useContext(TodoContext);
+  return useObserver(() => (
     <div className="todo-list">
       <div className="site-title">
         <h1>
@@ -11,39 +14,29 @@ export default function TodoList() {
         </h1>
       </div>
       <div className="list-items">
-        <TodoItem {
-          ...{
-            title: 'Tomorrow Walk',
-            description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui quasi ad exercitationem vero explicabo, natus ipsam harum autem saepe ratione molestias totam voluptatem quaerat esse! Necessitatibus culpa eligendi blanditiis est.',
-            isCompleted: false,
-            id: 0,
-          }
-        } />
-        <TodoItem {
-          ...{
-            title: 'Tomorrow Walk',
-            description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui quasi ad exercitationem vero explicabo, natus ipsam harum autem saepe ratione molestias totam voluptatem quaerat esse! Necessitatibus culpa eligendi blanditiis est.',
-            isCompleted: false,
-            id: 1,
-          }
-        } />
-        <TodoItem {
-          ...{
-            title: 'Tomorrow Walk',
-            description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui quasi ad exercitationem vero explicabo, natus ipsam harum autem saepe ratione molestias totam voluptatem quaerat esse! Necessitatibus culpa eligendi blanditiis est.',
-            isCompleted: false,
-            id: 2,
-          }
-        } />
-        <TodoItem {
-          ...{
-            title: 'Tomorrow Walk',
-            description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui quasi ad exercitationem vero explicabo, natus ipsam harum autem saepe ratione molestias totam voluptatem quaerat esse! Necessitatibus culpa eligendi blanditiis est.',
-            isCompleted: false,
-            id: 3,
-          }
-        } />
+        {
+          todos.length ? (
+            todos.map((todo: {title: string, description: string, isCompleted: string, id: string}) => (
+              (
+                <TodoItem {
+                  ...{
+                    title: todo.title,
+                    description: todo.description,
+                    id: todo.id,
+                    isCompleted: todo.isCompleted,
+                    key: todo.id,
+                  }
+
+                } />
+              )
+            ))
+          ) : (
+            <h3 className="text-center">
+              Nothing to show. Please add a todo.
+            </h3>
+          )
+        }
       </div>
     </div>
-  )
+  ))
 }
