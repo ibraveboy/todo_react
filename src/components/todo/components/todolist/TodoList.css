@@ -1,0 +1,43 @@
+.todo-list {
+  background-color: #343440;
+  padding: 0px 10px;
+  width: 20%;
+  min-width: 500px;
+  min-height: 100vh;
+}
+.todo-list .site-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border-bottom: 2px solid white; */
+  color: #0D0D0D;
+  font-size: 25px;
+}
+
+.todo-list .site-title h1 {
+  font-weight: 400;
+}
+
+.todo-list .list-items {
+  margin: 0px 0px 40px;
+}
+/* Color Theme Swatches in Hex */
+.Get-It-Done-1-hex { color: #1B1C26; }
+.Get-It-Done-2-hex { color: #343440; }
+.Get-It-Done-3-hex { color: #D9D9D9; }
+.Get-It-Done-4-hex { color: #737373; }
+.Get-It-Done-5-hex { color: #0D0D0D; }
+
+/* Color Theme Swatches in RGBA */
+.Get-It-Done-1-rgba { color: rgba(27, 27, 38, 1); }
+.Get-It-Done-2-rgba { color: rgba(51, 52, 63, 1); }
+.Get-It-Done-3-rgba { color: rgba(216, 216, 216, 1); }
+.Get-It-Done-4-rgba { color: rgba(114, 114, 114, 1); }
+.Get-It-Done-5-rgba { color: rgba(12, 12, 12, 1); }
+
+/* Color Theme Swatches in HSLA */
+.Get-It-Done-1-hsla { color: hsla(236, 16, 12, 1); }
+.Get-It-Done-2-hsla { color: hsla(236, 10, 22, 1); }
+.Get-It-Done-3-hsla { color: hsla(0, 0, 85, 1); }
+.Get-It-Done-4-hsla { color: hsla(0, 0, 45, 1); }
+.Get-It-Done-5-hsla { color: hsla(0, 0, 5, 1); }
