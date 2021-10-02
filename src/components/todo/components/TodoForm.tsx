@@ -2,16 +2,18 @@ import { useObserver } from 'mobx-react-lite';
 import React, { useContext, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import TodoContext from '../../../app/todo/context';
+import { TodoFormProps, TodoType } from '../../../interfaces';
 import useFormState from './useFormState';
 
-export default function TodoForm({ editMode, todo }) {
-  const initialValues = editMode ? { ...todo } : {
+export default function TodoForm({ editMode, todo }: TodoFormProps) {
+  const initialValues: TodoType = (editMode) ? { ...todo as TodoType } : {
+    id: '',
     title: '',
     description: '',
     isCompleted: 'false'
   };
   const { createTodo, updateTodo } = useContext(TodoContext);
-  const onSubmit = (values) => {
+  const onSubmit = (values: TodoType) => {
     if (editMode) {
       updateTodo({ ...values});
       toast.success('Todo item updated.');
@@ -28,14 +30,14 @@ export default function TodoForm({ editMode, todo }) {
 
   useEffect(()=> {
     if (todo && todo.id && todo.id !== values.id) {
-      setValues(todo);
+      setValues(todo as TodoType);
     }
   }, [todo, values, setValues])
 
   return useObserver(() => (
     <form className='todo-form' onSubmit={handleSubmit}>
       <div className='input-group'>
-        <label for='title'>Set Title</label>
+        <label htmlFor='title'>Set Title</label>
         <input
           id='title'
           name='title'
@@ -48,13 +50,13 @@ export default function TodoForm({ editMode, todo }) {
         </small>
       </div>
       <div className='input-group'>
-        <label for='description'>Description</label>
+        <label htmlFor='description'>Description</label>
         <textarea
           id='description'
           name='description'
           value={values.description}
           onChange={handleChange}
-          rows='10'
+          rows={10}
         ></textarea>
         <small className='invalid-msg text-left'>
           {errors && errors.description ? errors.description : ''}
@@ -62,21 +64,25 @@ export default function TodoForm({ editMode, todo }) {
       </div>
       <div className='input-group'>
         <label>Status</label>
-        <div className="text-left" onChange={handleChange}>
+        <div className="text-left">
           <input
             type="radio"
             id="isCompletedTrue"
             name="isCompleted"
             value="true"
             checked={values.isCompleted === 'true'}
-          /><label for="isCompletedTrue">Completed</label>
+            aria-checked={(values.isCompleted === 'true')}
+            onChange={handleChange}
+          /><label htmlFor="isCompletedTrue">Completed</label>
           <input
+            aria-checked={(values.isCompleted === 'false')}
             type="radio"
             id="isCompletedFalse"
             name="isCompleted"
             value="false"
             checked={values.isCompleted === 'false'}
-          /><label for="isCompletedFalse">Not Completed</label>
+            onChange={handleChange}
+          /><label htmlFor="isCompletedFalse">Not Completed</label>
         </div>
         <small className='invalid-msg text-left'>
           {errors && errors.isCompleted ? errors.isCompleted : ''}

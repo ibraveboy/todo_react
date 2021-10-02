@@ -3,9 +3,10 @@ import './TodoList.css';
 import TodoItem from './TodoItem/TodoItem'
 import TodoContext from '../../../../app/todo/context';
 import { useObserver } from 'mobx-react-lite';
+import { StoreType, TodoType } from '../../../../interfaces';
 
 export default function TodoList() {
-  const { todos } = useContext(TodoContext);
+  const { todos } = useContext<StoreType>(TodoContext);
   return useObserver(() => (
     <div className="todo-list">
       <div className="site-title">
@@ -16,7 +17,7 @@ export default function TodoList() {
       <div className="list-items">
         {
           todos.length ? (
-            todos.map((todo: {title: string, description: string, isCompleted: string, id: string}) => (
+            todos.map((todo: TodoType) => (
               (
                 <TodoItem {
                   ...{

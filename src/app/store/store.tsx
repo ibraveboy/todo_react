@@ -1,10 +1,11 @@
 import { useLocalStore } from 'mobx-react';
+import { StoreType, TodoType } from '../../interfaces';
 
 const useStore = () => {
-  const store = useLocalStore(() => ({
+  const store = useLocalStore<StoreType>(() => ({
     todos: [],
     viewTodo: {},
-    setViewTodo: (todo) => {
+    setViewTodo: (todo: TodoType) => {
       store.viewTodo = {...todo};
     },
     clearViewTodo: () => {

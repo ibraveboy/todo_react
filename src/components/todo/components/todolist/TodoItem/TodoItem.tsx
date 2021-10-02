@@ -1,12 +1,11 @@
 import React, { useContext } from 'react'
-import { withRouter, RouteComponentProps } from 'react-router';
+import { withRouter } from 'react-router';
 import TodoContext from '../../../../../app/todo/context';
+import { StoreType, TodoItemProps } from '../../../../../interfaces';
 import './TodoItem.css';
 
-interface IProps extends RouteComponentProps<any> { title: string, description: string, id: string, isCompleted:string };
-
-function TodoItem(props: IProps) {
-  const { setViewTodo } = useContext(TodoContext);
+function TodoItem(props: TodoItemProps) {
+  const { setViewTodo } = useContext<StoreType>(TodoContext);
   return (
     <div className="todo-item" key={props.id} role="link" aria-label="click to edit selected todo" onClick={() => {
       setViewTodo({

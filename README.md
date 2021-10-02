@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Introduction
+This is a simple todo app created to practice TypeScript and Mobx. I have already been using redux on different projects but never tried Mobx. 
+So in this project I use Mobx to understand the working of Mobx and also practice TypeScript.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

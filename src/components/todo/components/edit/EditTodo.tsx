@@ -3,9 +3,11 @@ import EditTodoForm from '../TodoForm';
 import '../create/CreateTodo.css';
 import TodoContext from '../../../../app/todo/context';
 import { useObserver } from 'mobx-react-lite';
+import { RouteComponentProps } from 'react-router';
+import { StoreType, TodoType } from '../../../../interfaces';
 
-export default function EditTodo({ history }) {
-  const { viewTodo } = useContext(TodoContext);
+export default function EditTodo({ history }: RouteComponentProps) {
+  const { viewTodo } = useContext<StoreType>(TodoContext);
 
   if (!Object.keys(viewTodo).length) {
     history.push('/')
@@ -22,7 +24,7 @@ export default function EditTodo({ history }) {
         <EditTodoForm
           {
             ...{
-              todo: {...viewTodo},
+              todo: {...viewTodo as TodoType},
               editMode: true
             }
           }

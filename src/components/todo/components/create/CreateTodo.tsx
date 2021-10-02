@@ -12,7 +12,12 @@ export default function CreateTodo() {
         <p>
           lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
         </p>
-        <CreateTodoForm />
+        <CreateTodoForm {
+          ...{
+            todo: {},
+            editMode: false
+          }
+        } />
       </div>
     </div>
   )
